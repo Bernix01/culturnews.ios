@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 import Foundation
 
 class EventsViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate {
@@ -75,11 +76,10 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
     }
     private func fetchData(handler: (Void -> Void)?) {
         Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":"limit","limit":"30","orderby":"created","maxsubs":"5"])
-            .responseString { (_, _, string, _) in
-                println(string)
-            }
-            .responseJSON { (_, _, JSON, _) in
-                println(JSON)
+            .responseJSON { (_, _, response, _) in
+                //convert to SwiftJSON
+                let json = JSON(response!)
+                println(json)
         }
         /* var indexPaths = [NSIndexPath]()
         let firstIndex = tableData.count

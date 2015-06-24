@@ -3,6 +3,7 @@
 use_frameworks!
 target 'CulturNews' do
 pod 'YALSideMenu'
+pod 'SwiftyJSON'
 pod 'Alamofire', '~> 1.2'
 pod 'UIScrollView-InfiniteScroll'
 end

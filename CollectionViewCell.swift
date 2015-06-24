@@ -6,11 +6,8 @@
 //
 //
 
-import UIKit
+import Cocoa
 
 class CollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var ImvHeader: UIImageView!
-    @IBOutlet weak var DescrTxt: UILabel!
-    
+
 }

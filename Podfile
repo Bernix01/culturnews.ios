@@ -4,6 +4,7 @@ use_frameworks!
 target 'CulturNews' do
 pod 'YALSideMenu'
 pod 'Alamofire', '~> 1.2'
+pod 'UIScrollView-InfiniteScroll'
 end
 
 target 'CulturNewsTests' do

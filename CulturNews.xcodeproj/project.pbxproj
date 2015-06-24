@@ -18,6 +18,8 @@
 		191D5F421B3A411800BEF502 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F411B3A411800BEF502 /* EventsViewController.swift */; };
 		191D5F441B3A532000BEF502 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F431B3A532000BEF502 /* RestApi.swift */; };
 		191D5F471B3A554700BEF502 /* MrEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F461B3A554700BEF502 /* MrEvent.swift */; };
+		191D5F491B3A663800BEF502 /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F481B3A663800BEF502 /* CustomInfiniteIndicator.swift */; };
+		191D5F4D1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F4C1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m */; };
 		191EDEFE1B3A10D2008774EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191EDEFD1B3A10D2008774EF /* AppDelegate.swift */; };
 		191EDF001B3A10D2008774EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191EDEFF1B3A10D2008774EF /* ViewController.swift */; };
 		191EDF031B3A10D2008774EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191EDF011B3A10D2008774EF /* Main.storyboard */; };
@@ -49,6 +51,10 @@
 		191D5F411B3A411800BEF502 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		191D5F431B3A532000BEF502 /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
 		191D5F461B3A554700BEF502 /* MrEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrEvent.swift; sourceTree = "<group>"; };
+		191D5F481B3A663800BEF502 /* CustomInfiniteIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfiniteIndicator.swift; sourceTree = "<group>"; };
+		191D5F4A1B3B06B700BEF502 /* InfiniteScrollViewDemoSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InfiniteScrollViewDemoSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		191D5F4B1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
+		191D5F4C1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		191EDEF81B3A10D2008774EF /* CulturNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CulturNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		191EDEFC1B3A10D2008774EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		191EDEFD1B3A10D2008774EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +101,8 @@
 		191D5F3A1B3A1FFF00BEF502 /* utlils */ = {
 			isa = PBXGroup;
 			children = (
+				191D5F4B1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.h */,
+				191D5F4C1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m */,
 				191D5F2D1B3A126A00BEF502 /* AnimationDelegate.swift */,
 				191D5F2E1B3A126A00BEF502 /* CircularRevealAnimator.swift */,
 				191D5F2F1B3A126A00BEF502 /* CircularRevealTransitionAnimator.swift */,
@@ -143,6 +151,7 @@
 				191EDF041B3A10D2008774EF /* Images.xcassets */,
 				191EDF061B3A10D2008774EF /* LaunchScreen.xib */,
 				191D5F291B3A124D00BEF502 /* MenuViewController.swift */,
+				191D5F481B3A663800BEF502 /* CustomInfiniteIndicator.swift */,
 				191D5F3A1B3A1FFF00BEF502 /* utlils */,
 				191D5F351B3A128300BEF502 /* ContentViewController.swift */,
 				191D5F331B3A127800BEF502 /* UITableViewCell.swift */,
@@ -155,6 +164,7 @@
 		191EDEFB1B3A10D2008774EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				191D5F4A1B3B06B700BEF502 /* InfiniteScrollViewDemoSwift-Bridging-Header.h */,
 				191EDEFC1B3A10D2008774EF /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -346,6 +356,8 @@
 				191D5F301B3A126A00BEF502 /* AnimationDelegate.swift in Sources */,
 				191D5F311B3A126A00BEF502 /* CircularRevealAnimator.swift in Sources */,
 				191D5F441B3A532000BEF502 /* RestApi.swift in Sources */,
+				191D5F491B3A663800BEF502 /* CustomInfiniteIndicator.swift in Sources */,
+				191D5F4D1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m in Sources */,
 				191D5F321B3A126A00BEF502 /* CircularRevealTransitionAnimator.swift in Sources */,
 				191EDEFE1B3A10D2008774EF /* AppDelegate.swift in Sources */,
 				191D5F401B3A3BE900BEF502 /* CollectionViewCell.swift in Sources */,
@@ -479,6 +491,7 @@
 				INFOPLIST_FILE = CulturNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CulturNews/InfiniteScrollViewDemoSwift-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -490,6 +503,7 @@
 				INFOPLIST_FILE = CulturNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CulturNews/InfiniteScrollViewDemoSwift-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -87,7 +87,7 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         
         if jsonError != nil {
             showAlertWithError(jsonError)
-            completion?()
+            completion?()sdasd
             return
         }
 

@@ -35,16 +35,16 @@ extension ViewController: MenuViewControllerDelegate {
         selectedIndex = index
         switch(selectedIndex){
             case (0):
-                let content = storyboard!.instantiateViewControllerWithIdentifier("Content") as! ContentViewController
-                content.type = contentType
+                
+                let content = storyboard!.instantiateViewControllerWithIdentifier("Events") as! EventsViewController
                 self.navigator.setViewControllers([content], animated: true)
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                
                     self.dismissViewControllerAnimated(true, completion: nil)
+
             }
                     case(1):
-                    let content = storyboard!.instantiateViewControllerWithIdentifier("Events") as! EventsViewController
+                    let content = storyboard!.instantiateViewControllerWithIdentifier("News") as! NewsViewController
                     self.navigator.setViewControllers([content], animated: true)
                     
                     dispatch_async(dispatch_get_main_queue()) {
@@ -65,6 +65,9 @@ extension ViewController: MenuViewControllerDelegate {
     
     func menuDidCancel(_: MenuViewController) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
 }
 

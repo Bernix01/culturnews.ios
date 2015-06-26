@@ -6,6 +6,7 @@ pod 'YALSideMenu'
 pod 'SwiftyJSON'
 pod 'Alamofire', '~> 1.2'
 pod 'UIScrollView-InfiniteScroll'
+pod 'MapleBacon'
 end
 
 target 'CulturNewsTests' do

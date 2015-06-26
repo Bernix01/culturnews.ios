@@ -10,7 +10,8 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var ImvHeader: UIImageView!
-    @IBOutlet weak var DescrTxt: UILabel!
+    @IBOutlet weak var HeaderImv: UIImageView!
+    @IBOutlet weak var TitileTxtv: UILabel!
+    @IBOutlet weak var DescrTxtv: UILabel!
     
 }

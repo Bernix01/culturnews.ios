@@ -10,12 +10,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CulturNews/EventsViewController.swift"
-            timestampString = "456859168.864011"
+            timestampString = "456981236.335031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "fetchData(_:)"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "fetchData(_:handler:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CulturNews.EventsViewController.(fetchData in _922B800A276DBCE6197CE4E25BDE087A) (CulturNews.EventsViewController)(Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "CulturNews"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guillermobernal/Desktop/CulturNews/CulturNews/EventsViewController.swift"
+                  timestampString = "456960658.896713"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "765">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CulturNews.EventsViewController.((fetchData in _922B800A276DBCE6197CE4E25BDE087A) (CulturNews.EventsViewController) -&gt; (Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "CulturNews"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guillermobernal/Desktop/CulturNews/CulturNews/EventsViewController.swift"
+                  timestampString = "456960658.898186"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "649">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CulturNews/EventsViewController.swift"
+            timestampString = "456979711.416973"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "fetchData(_:handler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CulturNews/EventsViewController.swift"
+            timestampString = "456979711.416973"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "fetchData(_:handler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

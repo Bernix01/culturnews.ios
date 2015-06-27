@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191298B01B3DC402005A7ABA /* PlacesVcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298AF1B3DC402005A7ABA /* PlacesVcontroller.swift */; };
+		191298B21B3DC69C005A7ABA /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298B11B3DC69C005A7ABA /* CAPSPageMenu.swift */; };
+		191298B41B3DC703005A7ABA /* PlaceTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298B31B3DC703005A7ABA /* PlaceTypeController.swift */; };
+		191298B61B3DC90E005A7ABA /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191298B51B3DC90E005A7ABA /* View.xib */; };
+		191298B91B3DCD8A005A7ABA /* TestCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298B71B3DCD8A005A7ABA /* TestCollectionViewController.swift */; };
+		191298BA1B3DCD8A005A7ABA /* TestCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191298B81B3DCD8A005A7ABA /* TestCollectionViewController.xib */; };
+		191298BD1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298BB1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift */; };
+		191298BE1B3DCD9A005A7ABA /* MoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191298BC1B3DCD9A005A7ABA /* MoodCollectionViewCell.xib */; };
+		191298C11B3E0BE0005A7ABA /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 191298C01B3E0BE0005A7ABA /* UIScrollView+InfiniteScroll.m */; };
 		191D5F2A1B3A124D00BEF502 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F291B3A124D00BEF502 /* MenuViewController.swift */; };
 		191D5F2C1B3A125A00BEF502 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F2B1B3A125A00BEF502 /* ContentType.swift */; };
 		191D5F301B3A126A00BEF502 /* AnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F2D1B3A126A00BEF502 /* AnimationDelegate.swift */; };
@@ -18,13 +27,13 @@
 		191D5F421B3A411800BEF502 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F411B3A411800BEF502 /* EventsViewController.swift */; };
 		191D5F471B3A554700BEF502 /* MrEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F461B3A554700BEF502 /* MrEvent.swift */; };
 		191D5F491B3A663800BEF502 /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F481B3A663800BEF502 /* CustomInfiniteIndicator.swift */; };
-		191D5F4D1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 191D5F4C1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m */; };
 		191EDEFE1B3A10D2008774EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191EDEFD1B3A10D2008774EF /* AppDelegate.swift */; };
 		191EDF001B3A10D2008774EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191EDEFF1B3A10D2008774EF /* ViewController.swift */; };
 		191EDF031B3A10D2008774EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191EDF011B3A10D2008774EF /* Main.storyboard */; };
 		191EDF051B3A10D2008774EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191EDF041B3A10D2008774EF /* Images.xcassets */; };
 		191EDF081B3A10D2008774EF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191EDF061B3A10D2008774EF /* LaunchScreen.xib */; };
 		191EDF141B3A10D2008774EF /* CulturNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191EDF131B3A10D2008774EF /* CulturNewsTests.swift */; };
+		192C815B1B3E168900B66242 /* Mrlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192C815A1B3E168900B66242 /* Mrlace.swift */; };
 		193B7E561B3D8F3000389DEB /* HeaderReusablViewq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193B7E551B3D8F3000389DEB /* HeaderReusablViewq.swift */; };
 		194BCFB91B3D950A005A2891 /* NewsViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BCFB81B3D950A005A2891 /* NewsViewController .swift */; };
 		194BCFBB1B3D9966005A2891 /* NewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BCFBA1B3D9966005A2891 /* NewCell.swift */; };
@@ -44,6 +53,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		191298AF1B3DC402005A7ABA /* PlacesVcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesVcontroller.swift; sourceTree = "<group>"; };
+		191298B11B3DC69C005A7ABA /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
+		191298B31B3DC703005A7ABA /* PlaceTypeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTypeController.swift; sourceTree = "<group>"; };
+		191298B51B3DC90E005A7ABA /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		191298B71B3DCD8A005A7ABA /* TestCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectionViewController.swift; sourceTree = "<group>"; };
+		191298B81B3DCD8A005A7ABA /* TestCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCollectionViewController.xib; sourceTree = "<group>"; };
+		191298BB1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoodCollectionViewCell.swift; sourceTree = "<group>"; };
+		191298BC1B3DCD9A005A7ABA /* MoodCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoodCollectionViewCell.xib; sourceTree = "<group>"; };
+		191298BF1B3E0BE0005A7ABA /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
+		191298C01B3E0BE0005A7ABA /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		191D5F291B3A124D00BEF502 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		191D5F2B1B3A125A00BEF502 /* ContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		191D5F2D1B3A126A00BEF502 /* AnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationDelegate.swift; sourceTree = "<group>"; };
@@ -56,8 +75,6 @@
 		191D5F461B3A554700BEF502 /* MrEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrEvent.swift; sourceTree = "<group>"; };
 		191D5F481B3A663800BEF502 /* CustomInfiniteIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfiniteIndicator.swift; sourceTree = "<group>"; };
 		191D5F4A1B3B06B700BEF502 /* InfiniteScrollViewDemoSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InfiniteScrollViewDemoSwift-Bridging-Header.h"; sourceTree = "<group>"; };
-		191D5F4B1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
-		191D5F4C1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		191EDEF81B3A10D2008774EF /* CulturNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CulturNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		191EDEFC1B3A10D2008774EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		191EDEFD1B3A10D2008774EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +85,7 @@
 		191EDF0D1B3A10D2008774EF /* CulturNewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturNewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		191EDF121B3A10D2008774EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		191EDF131B3A10D2008774EF /* CulturNewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturNewsTests.swift; sourceTree = "<group>"; };
+		192C815A1B3E168900B66242 /* Mrlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mrlace.swift; sourceTree = "<group>"; };
 		193B7E551B3D8F3000389DEB /* HeaderReusablViewq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderReusablViewq.swift; sourceTree = "<group>"; };
 		194BCFB81B3D950A005A2891 /* NewsViewController .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NewsViewController .swift"; sourceTree = "<group>"; };
 		194BCFBA1B3D9966005A2891 /* NewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCell.swift; sourceTree = "<group>"; };
@@ -109,8 +127,6 @@
 		191D5F3A1B3A1FFF00BEF502 /* utlils */ = {
 			isa = PBXGroup;
 			children = (
-				191D5F4B1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.h */,
-				191D5F4C1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m */,
 				191D5F2D1B3A126A00BEF502 /* AnimationDelegate.swift */,
 				191D5F2E1B3A126A00BEF502 /* CircularRevealAnimator.swift */,
 				191D5F2F1B3A126A00BEF502 /* CircularRevealTransitionAnimator.swift */,
@@ -125,6 +141,7 @@
 			children = (
 				191D5F461B3A554700BEF502 /* MrEvent.swift */,
 				194BCFBC1B3D9A68005A2891 /* MrNew.swift */,
+				192C815A1B3E168900B66242 /* Mrlace.swift */,
 			);
 			name = object;
 			sourceTree = "<group>";
@@ -156,6 +173,7 @@
 				191EDEFD1B3A10D2008774EF /* AppDelegate.swift */,
 				191D5F3F1B3A3BE900BEF502 /* CollectionViewCell.swift */,
 				194BCFB81B3D950A005A2891 /* NewsViewController .swift */,
+				191298B11B3DC69C005A7ABA /* CAPSPageMenu.swift */,
 				191EDEFF1B3A10D2008774EF /* ViewController.swift */,
 				191D5F2B1B3A125A00BEF502 /* ContentType.swift */,
 				191EDF011B3A10D2008774EF /* Main.storyboard */,
@@ -167,8 +185,15 @@
 				191D5F3A1B3A1FFF00BEF502 /* utlils */,
 				191D5F351B3A128300BEF502 /* ContentViewController.swift */,
 				191D5F331B3A127800BEF502 /* UITableViewCell.swift */,
+				191298BB1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift */,
+				191298BC1B3DCD9A005A7ABA /* MoodCollectionViewCell.xib */,
+				191298B71B3DCD8A005A7ABA /* TestCollectionViewController.swift */,
+				191298B81B3DCD8A005A7ABA /* TestCollectionViewController.xib */,
 				191EDEFB1B3A10D2008774EF /* Supporting Files */,
 				194BCFBA1B3D9966005A2891 /* NewCell.swift */,
+				191298AF1B3DC402005A7ABA /* PlacesVcontroller.swift */,
+				191298B31B3DC703005A7ABA /* PlaceTypeController.swift */,
+				191298B51B3DC90E005A7ABA /* View.xib */,
 			);
 			path = CulturNews;
 			sourceTree = "<group>";
@@ -176,6 +201,8 @@
 		191EDEFB1B3A10D2008774EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				191298BF1B3E0BE0005A7ABA /* UIScrollView+InfiniteScroll.h */,
+				191298C01B3E0BE0005A7ABA /* UIScrollView+InfiniteScroll.m */,
 				191D5F4A1B3B06B700BEF502 /* InfiniteScrollViewDemoSwift-Bridging-Header.h */,
 				191EDEFC1B3A10D2008774EF /* Info.plist */,
 			);
@@ -290,8 +317,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191298B61B3DC90E005A7ABA /* View.xib in Resources */,
+				191298BE1B3DCD9A005A7ABA /* MoodCollectionViewCell.xib in Resources */,
 				191EDF031B3A10D2008774EF /* Main.storyboard in Resources */,
 				191EDF081B3A10D2008774EF /* LaunchScreen.xib in Resources */,
+				191298BA1B3DCD8A005A7ABA /* TestCollectionViewController.xib in Resources */,
 				191EDF051B3A10D2008774EF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,20 +390,26 @@
 			files = (
 				194BCFB91B3D950A005A2891 /* NewsViewController .swift in Sources */,
 				191D5F421B3A411800BEF502 /* EventsViewController.swift in Sources */,
+				191298B21B3DC69C005A7ABA /* CAPSPageMenu.swift in Sources */,
 				191EDF001B3A10D2008774EF /* ViewController.swift in Sources */,
 				191D5F471B3A554700BEF502 /* MrEvent.swift in Sources */,
+				191298B01B3DC402005A7ABA /* PlacesVcontroller.swift in Sources */,
 				191D5F341B3A127800BEF502 /* UITableViewCell.swift in Sources */,
 				191D5F2C1B3A125A00BEF502 /* ContentType.swift in Sources */,
+				191298C11B3E0BE0005A7ABA /* UIScrollView+InfiniteScroll.m in Sources */,
 				194BCFBB1B3D9966005A2891 /* NewCell.swift in Sources */,
 				194BCFBD1B3D9A68005A2891 /* MrNew.swift in Sources */,
 				191D5F2A1B3A124D00BEF502 /* MenuViewController.swift in Sources */,
 				193B7E561B3D8F3000389DEB /* HeaderReusablViewq.swift in Sources */,
 				191D5F361B3A128300BEF502 /* ContentViewController.swift in Sources */,
+				192C815B1B3E168900B66242 /* Mrlace.swift in Sources */,
+				191298BD1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift in Sources */,
+				191298B41B3DC703005A7ABA /* PlaceTypeController.swift in Sources */,
 				191D5F301B3A126A00BEF502 /* AnimationDelegate.swift in Sources */,
+				191298B91B3DCD8A005A7ABA /* TestCollectionViewController.swift in Sources */,
 				191D5F311B3A126A00BEF502 /* CircularRevealAnimator.swift in Sources */,
 				191D5F491B3A663800BEF502 /* CustomInfiniteIndicator.swift in Sources */,
 				194BCFBF1B3DA829005A2891 /* HeaderReusableViewn.swift in Sources */,
-				191D5F4D1B3B07D100BEF502 /* UIScrollView+InfiniteScroll.m in Sources */,
 				191D5F321B3A126A00BEF502 /* CircularRevealTransitionAnimator.swift in Sources */,
 				191EDEFE1B3A10D2008774EF /* AppDelegate.swift in Sources */,
 				191D5F401B3A3BE900BEF502 /* CollectionViewCell.swift in Sources */,

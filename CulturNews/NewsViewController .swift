@@ -19,6 +19,8 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
     var width : CGFloat?
     var offset: Int = 0
     
+    var pages_tota: Int = 2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,11 +101,15 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
         cell.nDescr.text = news[indexPath.row].content
         cell.ndate.text = news[indexPath.row].hdate
         if let imageURL = NSURL(string: news[indexPath.row].imgurl) {
-            cell.nImage.setImageWithURL(imageURL)
+            cell.nImage.setImageWithURL(imageURL, cacheScaled: true)
         }
         return cell
     }
     private func fetchData(offset: Int,handler: (Void -> Void)?) {
+        if(offset == pages_tota-1){
+            handler?()
+            return
+        }
         Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":"9","limit":"30","orderby":"created","maxsubs":"5","offset":offset])
             .responseJSON { (_, _, response, error) in
                 //convert to SwiftJSON
@@ -113,6 +119,7 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
                 let json = JSON(response!)
                 if let status = json["status"].string{
                     
+                    self.pages_tota = json["pages_total"].int!
                     
                     var indexPaths = [NSIndexPath]()
                     let firstIndex = self.news.count
@@ -127,17 +134,20 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
                             count++
                     }
                     
-                    self.news.sort({$0.date!.isGreaterThanDate($1.date!)})
-            self.collectionView?.performBatchUpdates({ () -> Void in
-                collectionView?.insertItemsAtIndexPaths(indexPaths)
-                }, completion: { (finished) -> Void in
-                    self.offset++
-            });
-
+                    self.collectionView?.performBatchUpdates({ () -> Void in
+                        collectionView?.insertItemsAtIndexPaths(indexPaths)
+                        }, completion: { (finished) -> Void in
+                            self.offset++
+                            handler?()
+                            
+                    });
+                    
                 }else{
                     self.showAlertWithError(json["status"].error)
+                    handler?()
+                    }
                 }
-                }
+
         }
     }
     

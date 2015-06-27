@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MoodCollectionViewCell" id="gTV-IL-0wX" customClass="MoodCollectionViewCell" customModule="CulturNews">
+            <rect key="frame" x="0.0" y="0.0" width="507" height="155"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="507" height="155"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sD8-RE-KMc">
+                        <rect key="frame" x="232" y="8" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="74U-Ae-erP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aco-6J-AN0">
+                        <rect key="frame" x="107" y="39" width="387" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rnh-4T-5Fe">
+                        <rect key="frame" x="8" y="39" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="Vtk-st-Fd4"/>
+                            <constraint firstAttribute="width" secondItem="Rnh-4T-5Fe" secondAttribute="height" multiplier="1:1" id="hDs-3U-DJA"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="Rnh-4T-5Fe" firstAttribute="top" secondItem="sD8-RE-KMc" secondAttribute="bottom" constant="2" id="1Ch-Rw-bMw"/>
+                <constraint firstItem="Rnh-4T-5Fe" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="79S-CP-bTk"/>
+                <constraint firstItem="sD8-RE-KMc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="8ay-bI-c8d"/>
+                <constraint firstItem="Aco-6J-AN0" firstAttribute="top" secondItem="Rnh-4T-5Fe" secondAttribute="top" constant="2" id="9Zn-zK-xGc"/>
+                <constraint firstItem="Aco-6J-AN0" firstAttribute="leading" secondItem="Rnh-4T-5Fe" secondAttribute="trailing" constant="2" id="Dkb-iw-OlZ"/>
+                <constraint firstAttribute="trailing" secondItem="sD8-RE-KMc" secondAttribute="trailing" constant="2" id="gbX-An-dFe"/>
+                <constraint firstItem="sD8-RE-KMc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="rgY-DE-pAD"/>
+                <constraint firstAttribute="trailing" secondItem="Aco-6J-AN0" secondAttribute="trailing" constant="2" id="xfM-uk-xUp"/>
+            </constraints>
+            <size key="customSize" width="538" height="163"/>
+            <connections>
+                <outlet property="descr" destination="Aco-6J-AN0" id="CX4-gc-8lf"/>
+                <outlet property="himg" destination="Rnh-4T-5Fe" id="6uq-tV-7ci"/>
+                <outlet property="name" destination="sD8-RE-KMc" id="3Ht-RL-vzr"/>
+            </connections>
+            <point key="canvasLocation" x="556.5" y="327.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

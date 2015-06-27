@@ -18,10 +18,15 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
     var events: [MrEvent] = []
     var width : CGFloat?
     var offset: Int = 0
+    var pages_tota: Int = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Status bar white font
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.title = "sdfs"
         // Set custom indicator
         collectionView?.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         
@@ -40,12 +45,17 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         fetchData(self.offset,handler: nil)
 
     }
-    override func shouldAutorotate() -> Bool {
-        return false
+    override func viewWillAppear(animated: Bool){
+        navigationItem.title = "eventos"
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSizeMake(100, 100);
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+
     override func supportedInterfaceOrientations() -> Int {
         return UIInterfaceOrientation.Portrait.rawValue
     }
@@ -99,13 +109,60 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         cell.TitileTxtv.sizeToFit()
         cell.DescrTxtv.text = events[indexPath.row].details
         cell.DescrTxtv.sizeToFit()
+        cell.backgroundColor = getBGColore(indexPath.row)
         if let imageURL = NSURL(string: events[indexPath.row].imgUrl) {
-            cell.HeaderImv.setImageWithURL(imageURL)
+            cell.HeaderImv.setImageWithURL(imageURL, cacheScaled: true)
         }
         return cell
     }
+    func getBGColore(index: Int) -> UIColor{
+        var pos = index%6
+        switch(pos){
+        case 0:
+            return UIColor(rgba: "#4e4136")
+        case 1:
+            return UIColor(rgba: "#625343")
+        case 2:
+            return UIColor(rgba: "#373530")
+        case 3:
+            return UIColor(rgba: "#e1cb9a")
+        case 4:
+            return UIColor(rgba: "#5b5040")
+        case 5:
+            return UIColor(rgba: "#c5aa72")
+        default:
+            return UIColor(rgba: "#c5aa72")
+            
+        }
+    }
+    func setType (stype: String) -> Int {
+        func toType (type: String) -> Int{
+            switch type{
+            case "TEATRO":
+                return 0
+            case "MUSICA CONTEMPORANEA":
+                return 1
+            case "MUSICA CLASICA":
+                return 2
+            case "DANZA":
+                return 3
+            case "PINTURA":
+                return 4
+            case "LITERATURA":
+                return 5
+            default:
+                return 0;
+            }
+        }
+        let ntype: Int = toType(stype)
+        return ntype
+    }
     private func fetchData(offset: Int,handler: (Void -> Void)?) {
-        Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":"8","limit":"30","orderby":"created","maxsubs":"5","offset":offset])
+        if(offset == pages_tota-1){
+            handler?()
+            return
+        }
+        Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":"8","limit":"15","orderby":"created","maxsubs":"5","offset":offset])
             .responseJSON { (_, _, response, error) in
                 //convert to SwiftJSON
                 if(error != nil){
@@ -113,7 +170,10 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                 }else{
                 let json = JSON(response!)
                 if let status = json["status"].string{
-                    
+                    self.pages_tota = json["pages_total"].int!
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+                    dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
                     
                     var indexPaths = [NSIndexPath]()
                     let firstIndex = self.events.count
@@ -122,22 +182,28 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                         let indexPath = NSIndexPath(forItem: firstIndex + count, inSection: 0)
                         let submeta: JSON! = JSON(data:(subJson["metadata","xreference"].string!).dataUsingEncoding(NSUTF8StringEncoding)!)
                         let id: String = subJson["id"].string!
-                        let event = MrEvent(title: self.tryGetString("title", json: subJson), detail: self.tryGetString("metadesc", json: subJson),dateStart: self.tryGetString("s", json: submeta) , dateEnd: self.tryGetString("e", json: submeta),fb: self.tryGetString("fb", json: submeta), tw: self.tryGetString("tw", json: submeta),wb: self.tryGetString("w", json: submeta), ig: self.tryGetString("ig", json: submeta), content: String(htmlEncodedString: self.tryGetString("content", json: subJson)), typestr: self.tryGetString("category_title", json: subJson),id: id.toInt()!,  imgurl: subJson["images"]["image_intro"].string!)
-                        if (event.dateEnd!.isGreaterThanDate(NSDate())) {
+                        let s: NSDate = dateFormatter.dateFromString(self.tryGetString("s", json: submeta))!
+                        let e: NSDate = dateFormatter.dateFromString(self.tryGetString("e", json: submeta))!
+                        let type: Int = self.setType(self.tryGetString("category_title", json: subJson))
+                        let event = MrEvent(title: self.tryGetString("title", json: subJson), detail: self.tryGetString("metadesc", json: subJson),dateStart: s , dateEnd: e,fb: self.tryGetString("fb", json: submeta), tw: self.tryGetString("tw", json: submeta),wb: self.tryGetString("w", json: submeta), ig: self.tryGetString("ig", json: submeta), content: String(htmlEncodedString: self.tryGetString("content", json: subJson)), type: type ,id: id.toInt()!,  imgurl: subJson["images"]["image_intro"].string!)
+                        if (event.dateEnd.isGreaterThanDate(NSDate())) {
                             self.events.append(event)
                             indexPaths.append(indexPath)
                             count++
                         }
                     }
-                    self.events.sort({$0.dateStart!.isGreaterThanDate($1.dateStart!)})
+                    self.events.sort({$0.dateStart.isGreaterThanDate($1.dateStart)})
             self.collectionView?.performBatchUpdates({ () -> Void in
                 collectionView?.insertItemsAtIndexPaths(indexPaths)
                 }, completion: { (finished) -> Void in
                     self.offset++
+                    handler?()
+                    
             });
 
                 }else{
                     self.showAlertWithError(json["status"].error)
+                    handler?()
                 }
                 }
         }

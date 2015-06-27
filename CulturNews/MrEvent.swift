@@ -10,16 +10,15 @@ import Foundation
 class MrEvent {
     let title: String
     let details: String
-    var dateStart: NSDate?
-    var dateEnd: NSDate?
+    let dateStart: NSDate
+    let dateEnd: NSDate
     let fb, tw, wb, ig: String
     let content: String
     let id: Int
-    var type: Int!
-    let stype: String
+    var type: Int
     let imgUrl: String
     
-    init(title: String, detail: String, dateStart: String, dateEnd: String, fb:String,tw:String,wb:String,ig:String,content:String,typestr:String,id:Int,imgurl:String){
+    init(title: String, detail: String, dateStart: NSDate, dateEnd: NSDate, fb:String,tw:String,wb:String,ig:String,content:String,type:Int,id:Int,imgurl:String){
         self.title = title
         self.details = detail
         self.fb = fb
@@ -27,42 +26,12 @@ class MrEvent {
         self.wb = wb
         self.ig = ig
         self.content = content
-        self.stype = typestr
+        self.type = type
         self.id = id
         self.imgUrl = imgurl
         self.type = 0
-        self.setType(dateStart,e: dateEnd)
-        
+        self.dateStart = dateStart
+        self.dateEnd = dateEnd
     }
     
-    func setType (s: String, e: String) {
-        func toType (type: String) -> Int{
-            switch type{
-            case "TEATRO":
-                return 0
-            case "MUSICA CONTEMPORANEA":
-                return 1
-            case "MUSICA CLASICA":
-                return 2
-            case "DANZA":
-                return 3
-            case "PINTURA":
-                return 4
-            case "LITERATURA":
-                return 5
-            default:
-                return 0;
-            }
-        }
-        let ntype: Int = toType(self.stype)
-        self.type = ntype
-        let dateFormatter = NSDateFormatter()
-        println(s+" "+e)
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-        self.dateStart = dateFormatter.dateFromString(s)
-        println(self.dateStart)
-        self.dateEnd = dateFormatter.dateFromString(e)
-        println(self.dateEnd)
-    }
 }

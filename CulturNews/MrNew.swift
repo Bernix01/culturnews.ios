@@ -44,7 +44,6 @@ class MrNew {
         }
         self.type = toType(type)
         let dateFormatter = NSDateFormatter()
-        println(date)
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         self.date = dateFormatter.dateFromString(date)

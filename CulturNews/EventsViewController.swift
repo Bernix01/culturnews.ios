@@ -14,19 +14,16 @@ import Foundation
 
 class EventsViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate {
     
-    private let apiURL = "https://api.flickr.com/services/feeds/photos_public.gne?nojsoncallback=1&format=json"
     var events: [MrEvent] = []
-    var width : CGFloat?
     var offset: Int = 0
     var pages_tota: Int = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Eventos"
         // Status bar white font
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.title = "sdfs"
+        //self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        //self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         // Set custom indicator
         collectionView?.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         
@@ -42,16 +39,40 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
             }
         }
         
-        fetchData(self.offset,handler: nil)
-
-    }
-    override func viewWillAppear(animated: Bool){
-        navigationItem.title = "eventos"
+        self.fetchData(self.offset) {
+            println(self.events.count)
+            if(self.events.count<9){
+                self.fetchData(self.offset) {
+                    println(self.events.count)
+                if(self.events.count<9){
+                    self.fetchData(self.offset,handler: nil)
+                }
+            }
+            }
+        }
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSizeMake(100, 100);
     }
     
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        println("clck")
+        if let touch = touches.first as? UITouch{
+            //transitionPoint = touch.locationInView(self.view)
+        }
+    }
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Detail") as! DetailVController
+        secondViewController.titlestr = events[indexPath.row].title
+        secondViewController.cnt = events[indexPath.row].content
+        secondViewController.imgurl = NSURL(string: events[indexPath.row].imgUrl)
+        secondViewController.fb = events[indexPath.row].fb
+        secondViewController.wb = events[indexPath.row].wb
+        secondViewController.ig = events[indexPath.row].ig
+        secondViewController.tw = events[indexPath.row].tw
+        
+        self.showViewController(secondViewController, sender: secondViewController)
+    }
     override func shouldAutorotate() -> Bool {
         return false
     }
@@ -62,9 +83,6 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let collectionWidth = CGRectGetWidth(collectionView.bounds);
         var itemWidth = collectionWidth / 3 - 2;
-        
-        width = itemWidth
-        
         return CGSizeMake(itemWidth, itemWidth*1.8);
     }
     
@@ -80,27 +98,6 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
     }
        override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return events.count
-    }
-    
-    override func collectionView(collectionView: UICollectionView,
-        viewForSupplementaryElementOfKind kind: String,
-        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-            //1
-            switch kind {
-                //2
-            case UICollectionElementKindSectionHeader:
-                //3
-                let headerView =
-                collectionView.dequeueReusableSupplementaryViewOfKind(kind,
-                    withReuseIdentifier: "Header",
-                    forIndexPath: indexPath)
-                    as! HeaderReusableViewq
-                headerView.label.text = "Eventos"
-                return headerView
-            default:
-                //4
-                assert(false, "Unexpected element kind")
-            }
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -132,7 +129,6 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
             return UIColor(rgba: "#c5aa72")
         default:
             return UIColor(rgba: "#c5aa72")
-            
         }
     }
     func setType (stype: String) -> Int {
@@ -158,7 +154,9 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         return ntype
     }
     private func fetchData(offset: Int,handler: (Void -> Void)?) {
-        if(offset == pages_tota-1){
+        println("getting data offset: \(self.offset) pages: \(self.pages_tota)")
+        if(offset == pages_tota){
+            println("fail")
             handler?()
             return
         }
@@ -170,7 +168,10 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                 }else{
                 let json = JSON(response!)
                 if let status = json["status"].string{
-                    self.pages_tota = json["pages_total"].int!
+                    if let pages = json["pages_total"].int{
+                        println(pages)
+                        self.pages_tota = pages
+                    }
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
                     dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
@@ -186,8 +187,10 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                         let e: NSDate = dateFormatter.dateFromString(self.tryGetString("e", json: submeta))!
                         let type: Int = self.setType(self.tryGetString("category_title", json: subJson))
                         let event = MrEvent(title: self.tryGetString("title", json: subJson), detail: self.tryGetString("metadesc", json: subJson),dateStart: s , dateEnd: e,fb: self.tryGetString("fb", json: submeta), tw: self.tryGetString("tw", json: submeta),wb: self.tryGetString("w", json: submeta), ig: self.tryGetString("ig", json: submeta), content: String(htmlEncodedString: self.tryGetString("content", json: subJson)), type: type ,id: id.toInt()!,  imgurl: subJson["images"]["image_intro"].string!)
+                        println("\(id)")
                         if (event.dateEnd.isGreaterThanDate(NSDate())) {
                             self.events.append(event)
+                            println("\(id)")
                             indexPaths.append(indexPath)
                             count++
                         }
@@ -196,7 +199,7 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
             self.collectionView?.performBatchUpdates({ () -> Void in
                 collectionView?.insertItemsAtIndexPaths(indexPaths)
                 }, completion: { (finished) -> Void in
-                    self.offset++
+                    self.offset+=15
                     handler?()
                     
             });

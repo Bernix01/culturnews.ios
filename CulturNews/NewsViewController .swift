@@ -23,7 +23,7 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Noticias"
         // Set custom indicator
         collectionView?.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         
@@ -74,26 +74,6 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
         return news.count
     }
     
-    override func collectionView(collectionView: UICollectionView,
-        viewForSupplementaryElementOfKind kind: String,
-        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-            //1
-            switch kind {
-                //2
-            case UICollectionElementKindSectionHeader:
-                //3
-                let headerView =
-                collectionView.dequeueReusableSupplementaryViewOfKind(kind,
-                    withReuseIdentifier: "Header",
-                    forIndexPath: indexPath)
-                    as! HeaderReusableViewn
-                headerView.label.text = "Noticias"
-                return headerView
-            default:
-                //4
-                assert(false, "Unexpected element kind")
-            }
-    }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: NewCell = collectionView.dequeueReusableCellWithReuseIdentifier("nCell", forIndexPath: indexPath) as! NewCell
@@ -159,6 +139,14 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
             println(json[name].error)
             return ""
         }
+    }
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Detail") as! DetailVController
+        secondViewController.titlestr = news[indexPath.row].title
+        secondViewController.cnt = news[indexPath.row].content
+        secondViewController.imgurl = NSURL(string: news[indexPath.row].imgurl)
+        
+        self.presentViewController(secondViewController, animated: true, completion: nil)
     }
     private func showAlertWithError(error: NSError!) {
         let alert = UIAlertView(

@@ -30,11 +30,11 @@ class ViewController: UIViewController {
 extension ViewController: MenuViewControllerDelegate {
     func menu(_: MenuViewController, didSelectItemAtIndex index: Int, atPoint point: CGPoint) {
         contentType = !contentType
+        //self.navigator = self.window.rootViewController
         transitionPoint = point
         selectedIndex = index
         switch(selectedIndex){
             case (0):
-                navigationItem.title = "sdfsdf"
                 let content = storyboard!.instantiateViewControllerWithIdentifier("Events") as! EventsViewController
                 self.navigator.setViewControllers([content], animated: true)
                 self.navigator.title = "Eventos"
@@ -77,13 +77,30 @@ extension ViewController: MenuViewControllerDelegate {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        println("clck")
+        if let touch = touches.first as? UITouch{
+            transitionPoint = touch.locationInView(self.view)
+        }
+    }
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        println("clck")
+        if let touch = touches.first as? UITouch{
+            transitionPoint = touch.locationInView(self.view)
+        }
+
+    }
 }
 
 extension ViewController: UINavigationControllerDelegate {
     func navigationController(_: UINavigationController, animationControllerForOperation _: UINavigationControllerOperation,
         fromViewController _: UIViewController, toViewController _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+            if let center = transitionPoint {
+                return CircularRevealTransitionAnimator(center: transitionPoint)
+            }else{
+                return CircularRevealTransitionAnimator(center: CGPointMake(0, 0))
+            }
             
-            return CircularRevealTransitionAnimator(center: transitionPoint)
     }
 }
 extension UIColor {

@@ -47,7 +47,7 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
         var itemWidth = collectionWidth - 2;
         
         
-        return CGSizeMake(itemWidth, 0);
+        return CGSizeMake(itemWidth, 200);
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +59,7 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
         self.catid = catid
     
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

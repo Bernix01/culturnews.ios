@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		191298B01B3DC402005A7ABA /* PlacesVcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298AF1B3DC402005A7ABA /* PlacesVcontroller.swift */; };
 		191298B21B3DC69C005A7ABA /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298B11B3DC69C005A7ABA /* CAPSPageMenu.swift */; };
-		191298B41B3DC703005A7ABA /* PlaceTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298B31B3DC703005A7ABA /* PlaceTypeController.swift */; };
-		191298B61B3DC90E005A7ABA /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191298B51B3DC90E005A7ABA /* View.xib */; };
+		191298B41B3DC703005A7ABA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298B31B3DC703005A7ABA /* Utils.swift */; };
 		191298B91B3DCD8A005A7ABA /* TestCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298B71B3DCD8A005A7ABA /* TestCollectionViewController.swift */; };
 		191298BA1B3DCD8A005A7ABA /* TestCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191298B81B3DCD8A005A7ABA /* TestCollectionViewController.xib */; };
 		191298BD1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191298BB1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift */; };
@@ -39,6 +38,7 @@
 		194BCFBB1B3D9966005A2891 /* NewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BCFBA1B3D9966005A2891 /* NewCell.swift */; };
 		194BCFBD1B3D9A68005A2891 /* MrNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BCFBC1B3D9A68005A2891 /* MrNew.swift */; };
 		194BCFBF1B3DA829005A2891 /* HeaderReusableViewn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BCFBE1B3DA829005A2891 /* HeaderReusableViewn.swift */; };
+		19ADBE371B3F58BC0077EC7C /* DetailVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADBE361B3F58BC0077EC7C /* DetailVController.swift */; };
 		DE30B9D8BE201AACD6442174 /* Pods_CulturNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D18A78A3591622E5D327980 /* Pods_CulturNews.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -55,8 +55,7 @@
 /* Begin PBXFileReference section */
 		191298AF1B3DC402005A7ABA /* PlacesVcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesVcontroller.swift; sourceTree = "<group>"; };
 		191298B11B3DC69C005A7ABA /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
-		191298B31B3DC703005A7ABA /* PlaceTypeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTypeController.swift; sourceTree = "<group>"; };
-		191298B51B3DC90E005A7ABA /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		191298B31B3DC703005A7ABA /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		191298B71B3DCD8A005A7ABA /* TestCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectionViewController.swift; sourceTree = "<group>"; };
 		191298B81B3DCD8A005A7ABA /* TestCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCollectionViewController.xib; sourceTree = "<group>"; };
 		191298BB1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoodCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		194BCFBA1B3D9966005A2891 /* NewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCell.swift; sourceTree = "<group>"; };
 		194BCFBC1B3D9A68005A2891 /* MrNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrNew.swift; sourceTree = "<group>"; };
 		194BCFBE1B3DA829005A2891 /* HeaderReusableViewn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderReusableViewn.swift; sourceTree = "<group>"; };
+		19ADBE361B3F58BC0077EC7C /* DetailVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVController.swift; sourceTree = "<group>"; };
 		5D18A78A3591622E5D327980 /* Pods_CulturNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CulturNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C8773701FAB1CFBC40C7F03 /* Pods-CulturNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CulturNews.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CulturNews/Pods-CulturNews.debug.xcconfig"; sourceTree = "<group>"; };
 		F95D3F732237ECF18300C044 /* Pods-CulturNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CulturNews.release.xcconfig"; path = "Pods/Target Support Files/Pods-CulturNews/Pods-CulturNews.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,8 +192,8 @@
 				191EDEFB1B3A10D2008774EF /* Supporting Files */,
 				194BCFBA1B3D9966005A2891 /* NewCell.swift */,
 				191298AF1B3DC402005A7ABA /* PlacesVcontroller.swift */,
-				191298B31B3DC703005A7ABA /* PlaceTypeController.swift */,
-				191298B51B3DC90E005A7ABA /* View.xib */,
+				191298B31B3DC703005A7ABA /* Utils.swift */,
+				19ADBE361B3F58BC0077EC7C /* DetailVController.swift */,
 			);
 			path = CulturNews;
 			sourceTree = "<group>";
@@ -317,7 +317,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				191298B61B3DC90E005A7ABA /* View.xib in Resources */,
 				191298BE1B3DCD9A005A7ABA /* MoodCollectionViewCell.xib in Resources */,
 				191EDF031B3A10D2008774EF /* Main.storyboard in Resources */,
 				191EDF081B3A10D2008774EF /* LaunchScreen.xib in Resources */,
@@ -404,12 +403,13 @@
 				191D5F361B3A128300BEF502 /* ContentViewController.swift in Sources */,
 				192C815B1B3E168900B66242 /* Mrlace.swift in Sources */,
 				191298BD1B3DCD9A005A7ABA /* MoodCollectionViewCell.swift in Sources */,
-				191298B41B3DC703005A7ABA /* PlaceTypeController.swift in Sources */,
+				191298B41B3DC703005A7ABA /* Utils.swift in Sources */,
 				191D5F301B3A126A00BEF502 /* AnimationDelegate.swift in Sources */,
 				191298B91B3DCD8A005A7ABA /* TestCollectionViewController.swift in Sources */,
 				191D5F311B3A126A00BEF502 /* CircularRevealAnimator.swift in Sources */,
 				191D5F491B3A663800BEF502 /* CustomInfiniteIndicator.swift in Sources */,
 				194BCFBF1B3DA829005A2891 /* HeaderReusableViewn.swift in Sources */,
+				19ADBE371B3F58BC0077EC7C /* DetailVController.swift in Sources */,
 				191D5F321B3A126A00BEF502 /* CircularRevealTransitionAnimator.swift in Sources */,
 				191EDEFE1B3A10D2008774EF /* AppDelegate.swift in Sources */,
 				191D5F401B3A3BE900BEF502 /* CollectionViewCell.swift in Sources */,
@@ -544,6 +544,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CulturNews/InfiniteScrollViewDemoSwift-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -556,6 +557,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CulturNews/InfiniteScrollViewDemoSwift-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

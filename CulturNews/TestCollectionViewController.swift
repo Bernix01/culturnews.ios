@@ -18,7 +18,7 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
     var catid: Int = 0
     var offset: Int = 0
     var pages_tota: Int = 2
-    
+    var nh: CGFloat?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set custom indicator
@@ -42,22 +42,38 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
         
     }
     
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let secondViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Detail") as! DetailVController
+        secondViewController.titlestr = Places[indexPath.row].name
+        secondViewController.cnt = Places[indexPath.row].content
+        secondViewController.imgurl = NSURL(string: Places[indexPath.row].himgurl)
+        secondViewController.fb = Places[indexPath.row].fb
+        secondViewController.wb = Places[indexPath.row].wb
+        secondViewController.ig = Places[indexPath.row].ig
+        secondViewController.tw = Places[indexPath.row].tw
+        secondViewController.isPlac = true
+        secondViewController.heightNav = nh
+        println("\(secondViewController.heightNav)")
+        self.presentViewController(secondViewController,animated: true, completion: nil)
+    }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let collectionWidth = CGRectGetWidth(collectionView.bounds);
-        var itemWidth = collectionWidth - 2;
-        
-        
-        return CGSizeMake(itemWidth, 200);
+        var itemWidth = collectionWidth - 20;
+        return CGSizeMake(itemWidth, 100);
     }
 
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return CGFloat(10)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, catid: Int) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, catid: Int, nheight: CGFloat) {
         super.init(nibName: nibNameOrNil,bundle: nibBundleOrNil)
         self.catid = catid
-    
+        self.nh = nheight
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -113,7 +129,7 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
                             let submeta: JSON! = JSON(data:(subJson["metadata","xreference"].string!).dataUsingEncoding(NSUTF8StringEncoding)!)
                             let place = Mrlace(
                                 name: self.tryGetString("title", json: subJson),
-                                conten: self.tryGetString("content", json: subJson),
+                                conten: String(htmlEncodedString: self.tryGetString("content", json: subJson)),
                                 descr: self.tryGetString("metadesc", json: subJson),
                                 extra: self.tryGetString("wbrd", json: submeta),
                                 fb: self.tryGetString("fb", json: submeta),

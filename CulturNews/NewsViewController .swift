@@ -1,5 +1,5 @@
 //
-//  EventsViewController.swift
+//  newsViewController.swift
 //  CulturNews
 //
 //  Created by GUILLERMO BERNAL on 6/23/15.
@@ -45,9 +45,6 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
     override func shouldAutorotate() -> Bool {
         return false
     }
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSizeMake(100, 100);
-    }
     override func supportedInterfaceOrientations() -> Int {
         return UIInterfaceOrientation.Portrait.rawValue
     }
@@ -86,11 +83,14 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
         return cell
     }
     private func fetchData(offset: Int,handler: (Void -> Void)?) {
-        if(offset == pages_tota-1){
+        
+        if(offset >= pages_tota*15){
+            println("fail")
             handler?()
             return
         }
-        Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":"9","limit":"30","orderby":"created","maxsubs":"5","offset":offset])
+        
+        Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":"9","limit":"30","orderby":"created","orderdir": "desc","maxsubs":"5","offset":offset])
             .responseJSON { (_, _, response, error) in
                 //convert to SwiftJSON
                 if(error != nil){
@@ -117,7 +117,7 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
                     self.collectionView?.performBatchUpdates({ () -> Void in
                         collectionView?.insertItemsAtIndexPaths(indexPaths)
                         }, completion: { (finished) -> Void in
-                            self.offset++
+                            self.offset+=5
                             handler?()
                             
                     });
@@ -140,14 +140,18 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
             return ""
         }
     }
+    
+    
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Detail") as! DetailVController
         secondViewController.titlestr = news[indexPath.row].title
         secondViewController.cnt = news[indexPath.row].content
         secondViewController.imgurl = NSURL(string: news[indexPath.row].imgurl)
         
-        self.presentViewController(secondViewController, animated: true, completion: nil)
+        self.showViewController(secondViewController, sender: secondViewController)
     }
+
+    
     private func showAlertWithError(error: NSError!) {
         let alert = UIAlertView(
             title: NSLocalizedString("Error fetching data", comment: ""),

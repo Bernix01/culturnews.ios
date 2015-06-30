@@ -36,9 +36,12 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
             
             self?.fetchData(self!.offset) {
                 collectionView.finishInfiniteScroll()
+               // self!.events.sort({$0.dateStart.isGreaterThanDate($1.dateStart)})
+                //self.collectionView.reloadItemsAtIndexPaths(indexPaths)
             }
         }
         
+        dispatch_async(dispatch_get_main_queue()) {
         self.fetchData(self.offset) {
             println(self.events.count)
             if(self.events.count<9){
@@ -50,11 +53,8 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
             }
             }
         }
+        }
     }
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSizeMake(100, 100);
-    }
-    
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         println("clck")
         if let touch = touches.first as? UITouch{
@@ -70,6 +70,7 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         secondViewController.wb = events[indexPath.row].wb
         secondViewController.ig = events[indexPath.row].ig
         secondViewController.tw = events[indexPath.row].tw
+        secondViewController.heightNav = self.navigationController?.navigationBar.frame.size.height
         
         self.showViewController(secondViewController, sender: secondViewController)
     }
@@ -154,8 +155,7 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         return ntype
     }
     private func fetchData(offset: Int,handler: (Void -> Void)?) {
-        println("getting data offset: \(self.offset) pages: \(self.pages_tota)")
-        if(offset == pages_tota){
+        if(offset >= pages_tota*15){
             println("fail")
             handler?()
             return
@@ -187,7 +187,6 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                         let e: NSDate = dateFormatter.dateFromString(self.tryGetString("e", json: submeta))!
                         let type: Int = self.setType(self.tryGetString("category_title", json: subJson))
                         let event = MrEvent(title: self.tryGetString("title", json: subJson), detail: self.tryGetString("metadesc", json: subJson),dateStart: s , dateEnd: e,fb: self.tryGetString("fb", json: submeta), tw: self.tryGetString("tw", json: submeta),wb: self.tryGetString("w", json: submeta), ig: self.tryGetString("ig", json: submeta), content: String(htmlEncodedString: self.tryGetString("content", json: subJson)), type: type ,id: id.toInt()!,  imgurl: subJson["images"]["image_intro"].string!)
-                        println("\(id)")
                         if (event.dateEnd.isGreaterThanDate(NSDate())) {
                             self.events.append(event)
                             println("\(id)")
@@ -195,11 +194,14 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                             count++
                         }
                     }
-                    self.events.sort({$0.dateStart.isGreaterThanDate($1.dateStart)})
+                    //self.events.sort({$0.dateStart.isGreaterThanDate($1.dateStart)})
             self.collectionView?.performBatchUpdates({ () -> Void in
                 collectionView?.insertItemsAtIndexPaths(indexPaths)
                 }, completion: { (finished) -> Void in
                     self.offset+=15
+                    self.events.sort({$1.dateStart.isGreaterThanDate($0.dateStart)})
+                    //self.collectionView?.reloadData()
+                    self.collectionView?.reloadItemsAtIndexPaths((self.collectionView?.indexPathsForVisibleItems())!)
                     handler?()
                     
             });

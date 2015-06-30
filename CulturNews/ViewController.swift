@@ -8,13 +8,43 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     private var selectedIndex = 0
+    let picker = UIView()
+    struct properties {
+        static let moods = [
+            ["title" : "Contacto", "color" : "#8647b7", "url":"http://culturnews.com/index.php/contactenos"],
+            ["title" : "Sugerencias", "color": "#4870b7", "url": "http://culturnews.com/index.php/contactenos/sugerencias"],
+        ]
+    }
     private var transitionPoint: CGPoint!
     private var contentType: ContentType = .Music
     private var navigator: UINavigationController!
+    @IBOutlet weak var menubutton: UIButton!
+    @IBAction func menu(sender: AnyObject) {
+        picker.hidden ? openPicker() : closePicker()
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        picker.backgroundColor = UIColor(rgba: "#272726")
+        createPicker()
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
+    {
+        return UIModalPresentationStyle.None
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if let popupView = segue.destinationViewController as? UIViewController
+        {
+            if let popup = popupView.popoverPresentationController
+            {
+                popup.delegate = self
+            }
+        }
         switch (segue.identifier, segue.destinationViewController) {
         case (.Some("presentMenu"), let menu as MenuViewController):
             menu.selectedItem = selectedIndex
@@ -25,6 +55,61 @@ class ViewController: UIViewController {
         default:
             super.prepareForSegue(segue, sender: sender)
         }
+    }
+    func createPicker()
+    {
+    picker.frame = CGRect(x: self.view.frame.width-125 , y: 70, width: 120, height: 90)
+    picker.alpha = 0
+    picker.hidden = true
+    picker.userInteractionEnabled = true
+    
+    var offset = 0
+    
+    for (index, feeling) in enumerate(properties.moods)
+    {
+    let button = UIButton()
+    button.frame = CGRect(x: 0, y: offset, width: 120, height: 43)
+    button.setTitleColor(UIColor(rgba: "#d5b480"), forState: .Normal)
+    button.setTitle(feeling["title"], forState: .Normal)
+        button.addTarget(self, action: "followButtonTapped:", forControlEvents: .TouchUpInside)
+    button.tag = index
+    
+    picker.addSubview(button)
+    
+    offset += 44
+    }
+    
+    view.addSubview(picker)
+    }
+    
+    func openPicker()
+    {
+        self.picker.hidden = false
+        
+        UIView.animateWithDuration(0.3,
+            animations: {
+                self.picker.frame = CGRect(x: (self.view.frame.width-125), y: 70, width: 120, height: 90)
+                self.picker.alpha = 1
+        })
+    }
+    
+    func closePicker()
+    {
+        UIView.animateWithDuration(0.3,
+            animations: {
+                self.picker.frame = CGRect(x: self.view.frame.width/2, y: 70, width: 286, height: 200)
+                self.picker.alpha = 0
+            },
+            completion: { finished in
+                self.picker.hidden = true
+            }
+        )
+    }
+    
+    func followButtonTapped(sender: UIButton) {
+        let urlString = NSURL(string: (properties.moods[sender.tag]["url"])!)
+        UIApplication.sharedApplication().openURL(urlString!)
+        
     }
 }
 extension ViewController: MenuViewControllerDelegate {
@@ -77,27 +162,20 @@ extension ViewController: MenuViewControllerDelegate {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        println("clck")
-        if let touch = touches.first as? UITouch{
-            transitionPoint = touch.locationInView(self.view)
-        }
-    }
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        println("clck")
-        if let touch = touches.first as? UITouch{
-            transitionPoint = touch.locationInView(self.view)
-        }
-
-    }
 }
 
 extension ViewController: UINavigationControllerDelegate {
     func navigationController(_: UINavigationController, animationControllerForOperation _: UINavigationControllerOperation,
-        fromViewController _: UIViewController, toViewController _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        fromViewController frtomVw: UIViewController, toViewController nextView: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+            if nextView is DetailVController ||  frtomVw is DetailVController {
+                println("poo")
+                self.menubutton.hidden = !self.menubutton.hidden
+            }
             if let center = transitionPoint {
+                println("bar")
                 return CircularRevealTransitionAnimator(center: transitionPoint)
             }else{
+                println("foo")
                 return CircularRevealTransitionAnimator(center: CGPointMake(0, 0))
             }
             

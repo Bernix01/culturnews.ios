@@ -22,26 +22,26 @@ class PlacesVcontroller: UIViewController {
         
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
-        
-        var controller2 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 11)
+        var heightNavfasd = self.navigationController?.navigationBar.frame.size.height
+        var controller2 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 11, nheight: heightNavfasd!)
         controller2.title = "TEATRO"
         controllerArray.append(controller2)
-        var controller3 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 12)
+        var controller3 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 12, nheight: heightNavfasd!)
         controller3.title = "MÚSICA CONTEMPORÁNEA"
         controllerArray.append(controller3)
         
-        var controller4 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 13)
+        var controller4 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 13, nheight: heightNavfasd!)
         controller4.title = "ESPACIOS CULTURALES"
         controllerArray.append(controller4)
     
-        var controller5 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 14)
+        var controller5 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 14, nheight: heightNavfasd!)
         controller5.title = "DANZA"
         controllerArray.append(controller5)
         
-        var controller6 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 15)
+        var controller6 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 15, nheight: heightNavfasd!)
         controller6.title = "MÚSICA CLÁSICA"
         controllerArray.append(controller6)
-        var controller7 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 16)
+        var controller7 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 16, nheight: heightNavfasd!)
         controller7.title = "PINTURA"
         controllerArray.append(controller7)
         
@@ -49,10 +49,13 @@ class PlacesVcontroller: UIViewController {
         var parameters: [CAPSPageMenuOption] = [
             .ScrollMenuBackgroundColor(UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)),
             .ViewBackgroundColor(UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 1.0)),
-            .SelectionIndicatorColor(UIColor.orangeColor()),
-            .BottomMenuHairlineColor(UIColor(red: 70.0/255.0, green: 70.0/255.0, blue: 80.0/255.0, alpha: 1.0)),
-            .MenuItemFont(UIFont(name: "HelveticaNeue", size: 13.0)!),
-            .MenuHeight((self.view.frame.width/1000)*90+100),
+            .SelectionIndicatorColor(UIColor(rgba: "#FFF")),
+            .BottomMenuHairlineColor(UIColor(rgba: "#272726")),
+            .UnselectedMenuItemLabelColor(UIColor(rgba: "#F0F0F0")),
+            .SelectedMenuItemLabelColor(UIColor(rgba: "#FFF")),
+            .MenuItemFont(UIFont(name: "HelveticaNeue", size: 10.0)!),
+            .MenuHeight(40),
+            .MenuItemWidthBasedOnTitleTextWidth(true),
             .MenuItemWidth(90.0),
             .CenterMenuItems(true)
         ]

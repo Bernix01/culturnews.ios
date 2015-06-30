@@ -10,7 +10,14 @@ import UIKit
 
 class DetailVController: UIViewController, UINavigationBarDelegate {
     
+    
+    
+    @IBOutlet weak var titleTXT: UILabel!
     @IBOutlet weak var imgvw: UIImageView!
+    @IBAction func goBack(sender: AnyObject) {
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    @IBOutlet weak var FNavHeight: NSLayoutConstraint!
     var imgurl: NSURL?
     var cnt: String?
     var titlestr: String?
@@ -18,57 +25,29 @@ class DetailVController: UIViewController, UINavigationBarDelegate {
     var fb: String = ""
     var tw: String = ""
     var ig: String = ""
-    
-    
-    @IBOutlet weak var titleTXT: UILabel!
+    var isPlac: Bool = false
+    var heightNav: CGFloat?
+    var Socials: [socialItem] = []
     @IBOutlet weak var cntTXT: UITextView!
-    @IBOutlet weak var socialvw: UIView!
+    @IBOutlet weak var HeaderVW: UIView!
     
-    @IBAction func goBack(sender: AnyObject) {
-        
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("\(heightNav)")
+        if(isPlac){
+            self.FNavHeight.constant = heightNav!
+            self.titleTXT.text = titlestr
+        }else{
+            HeaderVW.hidden = true
+            self.FNavHeight.constant = 0
+        }
         cntTXT.text = cnt
         imgvw.setImageWithURL(imgurl!, cacheScaled: true)
+        
+        self.title = titlestr
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        if(!wb.isEmpty){
-            let imageName = "icon-6.png"
-            let image = UIImage(named: imageName)
-            let imageView = UIImageView(image: image!)
-            imageView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-            socialvw.addSubview(imageView)
-        }
-        if(!fb.isEmpty){
-            let imageName2 = "icon-6.png"
-            let image2 = UIImage(named: imageName2)
-            let imageView2 = UIImageView(image: image2!)
-            imageView2.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-            socialvw.addSubview(imageView2)
-        }
-        if(!tw.isEmpty){
-            let imageName3 = "icon-6.png"
-            let image3 = UIImage(named: imageName3)
-            let imageView3 = UIImageView(image: image3!)
-            imageView3.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-            socialvw.addSubview(imageView3)
-        }
-        
-        if(!ig.isEmpty){
-            let imageName4 = "icon-6.png"
-            let image4 = UIImage(named: imageName4)
-            let imageView4 = UIImageView(image: image4!)
-            imageView4.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-            socialvw.addSubview(imageView4)
-        }
-        // Do any additional setup after loading the view.
-        self.navigationController?.navigationBar.hidden = false
-        var logButton : UIBarButtonItem = UIBarButtonItem(title: "RigthButtonTitle", style: UIBarButtonItemStyle.Plain, target: self, action: "")
-        
-        self.navigationController?.navigationItem.leftBarButtonItem = logButton
-        self.title = "Your Title"
-        
+                // Do any additional setup after loading the view.
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -80,14 +59,48 @@ class DetailVController: UIViewController, UINavigationBarDelegate {
     }
     
     
-    /*
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
+      switch (segue.identifier, segue.destinationViewController) {
+      case (.Some("socialSegue"), let navigator as CollectionViewControllerSocial):
+        if((UIImage(named: "wb")) != nil){
+            println("wb")
+        }else if((UIImage(named: "f3.png")) != nil){
+            println("f3.png")
+        }
+        if(!wb.isEmpty){
+            let imageName = "wb"
+            let social = socialItem(url: wb, imgName: imageName)
+            Socials.append(social)
+        }
+        if(!fb.isEmpty){
+            let imageName = "fb"
+            let social = socialItem(url: fb, imgName: imageName)
+            Socials.append(social)
+        }
+        if(!tw.isEmpty){
+            let imageName = "tw"
+            let social = socialItem(url: tw, imgName: imageName)
+            Socials.append(social)
+        }
+        
+        if(!ig.isEmpty){
+            let imageName = "ig"
+            let social = socialItem(url: ig, imgName: imageName)
+            Socials.append(social)
+        }
+        navigator.SocialItems = Socials
+      default:
+        super.prepareForSegue(segue, sender: sender)
+        }
+
     }
-    */
+    
+
     
 }

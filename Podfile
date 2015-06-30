@@ -7,7 +7,6 @@ pod 'SwiftyJSON'
 pod 'Alamofire', '~> 1.2'
 pod 'MapleBacon'
 pod 'PageMenu'
-pod 'PullToRefresher', '~> 1.0'
 end
 
 target 'CulturNewsTests' do

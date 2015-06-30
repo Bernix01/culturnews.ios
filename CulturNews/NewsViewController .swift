@@ -18,7 +18,7 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
     var news: [MrNew] = []
     var width : CGFloat?
     var offset: Int = 0
-    
+    var isLoadingData = false
     var pages_tota: Int = 2
     
     override func viewDidLoad() {
@@ -77,6 +77,7 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
         cell.nTitle.text = news[indexPath.row].title
         cell.nDescr.text = news[indexPath.row].content
         cell.ndate.text = news[indexPath.row].hdate
+        cell.backgroundColor = getBGColor(indexPath.row)
         if let imageURL = NSURL(string: news[indexPath.row].imgurl) {
             cell.nImage.setImageWithURL(imageURL, cacheScaled: true)
         }
@@ -84,12 +85,17 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
     }
     private func fetchData(offset: Int,handler: (Void -> Void)?) {
         
-        if(offset >= pages_tota*15){
-            println("fail")
+        if isLoadingData{
             handler?()
             return
         }
-        
+        if(offset >= pages_tota*15){
+            println("fail")
+            self.isLoadingData = false
+            handler?()
+            return
+        }
+        self.isLoadingData = true
         Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":"9","limit":"30","orderby":"created","orderdir": "desc","maxsubs":"5","offset":offset])
             .responseJSON { (_, _, response, error) in
                 //convert to SwiftJSON
@@ -117,13 +123,15 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
                     self.collectionView?.performBatchUpdates({ () -> Void in
                         collectionView?.insertItemsAtIndexPaths(indexPaths)
                         }, completion: { (finished) -> Void in
-                            self.offset+=5
+                            self.offset+=15
+                            self.isLoadingData = false
                             handler?()
                             
                     });
                     
                 }else{
                     self.showAlertWithError(json["status"].error)
+                    self.isLoadingData = false
                     handler?()
                     }
                 }
@@ -147,7 +155,7 @@ class NewsViewController: UICollectionViewController,UICollectionViewDelegateFlo
         secondViewController.titlestr = news[indexPath.row].title
         secondViewController.cnt = news[indexPath.row].content
         secondViewController.imgurl = NSURL(string: news[indexPath.row].imgurl)
-        
+        secondViewController.isNew = true
         self.showViewController(secondViewController, sender: secondViewController)
     }
 

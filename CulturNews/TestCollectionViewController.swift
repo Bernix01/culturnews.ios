@@ -19,6 +19,8 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
     var offset: Int = 0
     var pages_tota: Int = 2
     var nh: CGFloat?
+    var isLoadingData = false
+    var parent: PlacesVcontroller?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set custom indicator
@@ -53,8 +55,11 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
         secondViewController.tw = Places[indexPath.row].tw
         secondViewController.isPlac = true
         secondViewController.heightNav = nh
+        secondViewController.xp = Places[indexPath.row].x
+        secondViewController.yp = Places[indexPath.row].y
+        secondViewController.wbrd = Places[indexPath.row].extra
         println("\(secondViewController.heightNav)")
-        self.presentViewController(secondViewController,animated: true, completion: nil)
+       parent!.goTo(secondViewController)//(secondViewController,animated: true, completion: nil)
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let collectionWidth = CGRectGetWidth(collectionView.bounds);
@@ -70,9 +75,10 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, catid: Int, nheight: CGFloat) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, catid: Int, nheight: CGFloat, parent: PlacesVcontroller) {
         super.init(nibName: nibNameOrNil,bundle: nibBundleOrNil)
         self.catid = catid
+        self.parent = parent
         self.nh = nheight
     }
     
@@ -105,11 +111,18 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
     }
     
     private func fetchData(offset: Int,handler: (Void -> Void)?) {
-        if(offset == pages_tota-1){
+        if isLoadingData{
             handler?()
             return
         }
-        Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":self.catid,"limit":"15","orderby":"created","maxsubs":"5","offset":offset])
+        if(offset >= pages_tota*15){
+            println("fail")
+            handler?()
+            self.isLoadingData = false
+            return
+        }
+        self.isLoadingData = true
+        Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":self.catid,"limit":"15","orderby":"created","orderdir":"desc","maxsubs":"5","offset":offset])
             .responseJSON { (_, _, response, error) in
                 //convert to SwiftJSON
                 if(error != nil){
@@ -128,32 +141,35 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
                             let id: String = subJson["id"].string!
                             let submeta: JSON! = JSON(data:(subJson["metadata","xreference"].string!).dataUsingEncoding(NSUTF8StringEncoding)!)
                             let place = Mrlace(
-                                name: self.tryGetString("title", json: subJson),
-                                conten: String(htmlEncodedString: self.tryGetString("content", json: subJson)),
-                                descr: self.tryGetString("metadesc", json: subJson),
-                                extra: self.tryGetString("wbrd", json: submeta),
-                                fb: self.tryGetString("fb", json: submeta),
-                                tw: self.tryGetString("tw", json: submeta),
-                                wb: self.tryGetString("w", json: submeta),
-                                ig: self.tryGetString("ig", json: submeta),
-                                himgurl: self.tryGetString("image_intro", json: subJson["images"]),
-                                x: self.tryDouble("x", json: submeta),
-                                y: self.tryDouble("y", json: submeta))
+                                name: tryGetString("title",  subJson),
+                                conten: String(htmlEncodedString: tryGetString("content",  subJson)),
+                                descr: tryGetString("metadesc",  subJson),
+                                extra: tryGetString("wbrdi",  submeta),
+                                fb: tryGetString("fb",  submeta),
+                                tw: tryGetString("tw",  submeta),
+                                wb: tryGetString("w",  submeta),
+                                ig: tryGetString("ig",  submeta),
+                                himgurl: tryGetString("image_intro",  subJson["images"]),
+                                x: tryDouble("x",  submeta),
+                                y: tryDouble("y",  submeta))
                             self.Places.append(place)
                             indexPaths.append(indexPath)
+                            println(place.extra)
                             count++
                         }
                         
                         self.collectionView?.performBatchUpdates({ () -> Void in
                             collectionView?.insertItemsAtIndexPaths(indexPaths)
                             }, completion: { (finished) -> Void in
-                                self.offset++
+                                self.offset+=15
+                                self.isLoadingData = false
                                 handler?()
                                 
                         });
                         
                     }else{
                         self.showAlertWithError(json["status"].error)
+                        self.isLoadingData = false
                         handler?()
                     }
                 }
@@ -161,24 +177,6 @@ class TestCollectionViewController: UICollectionViewController, UIAlertViewDeleg
         }
     }
     
-    func tryGetString(name:String, json: JSON) -> String{
-        var name = name
-        if let str = json[name].string{
-            return str
-        }else{
-            println(json[name].error)
-            return ""
-        }
-    }
-    func tryDouble(name:String, json: JSON) -> Double{
-        var name = name
-        if let str = json[name].double{
-            return str
-        }else{
-            println(json[name].error)
-            return 0
-        }
-    }
     private func showAlertWithError(error: NSError!) {
         let alert = UIAlertView(
             title: NSLocalizedString("Error fetching data", comment: ""),

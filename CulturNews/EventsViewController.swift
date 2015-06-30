@@ -14,10 +14,11 @@ import Foundation
 
 class EventsViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate {
     
+    @IBOutlet var collView: UICollectionView!
     var events: [MrEvent] = []
     var offset: Int = 0
     var pages_tota: Int = 2
-    
+    var isLoadingData = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Eventos"
@@ -40,7 +41,6 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                 //self.collectionView.reloadItemsAtIndexPaths(indexPaths)
             }
         }
-        
         dispatch_async(dispatch_get_main_queue()) {
         self.fetchData(self.offset) {
             println(self.events.count)
@@ -70,6 +70,8 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         secondViewController.wb = events[indexPath.row].wb
         secondViewController.ig = events[indexPath.row].ig
         secondViewController.tw = events[indexPath.row].tw
+        secondViewController.xp = events[indexPath.row].x
+        secondViewController.yp = events[indexPath.row].y
         secondViewController.heightNav = self.navigationController?.navigationBar.frame.size.height
         
         self.showViewController(secondViewController, sender: secondViewController)
@@ -107,7 +109,7 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         cell.TitileTxtv.sizeToFit()
         cell.DescrTxtv.text = events[indexPath.row].details
         cell.DescrTxtv.sizeToFit()
-        cell.backgroundColor = getBGColore(indexPath.row)
+        cell.backgroundColor = getBGColor(indexPath.row)
         if let imageURL = NSURL(string: events[indexPath.row].imgUrl) {
             cell.HeaderImv.setImageWithURL(imageURL, cacheScaled: true)
         }
@@ -155,11 +157,17 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         return ntype
     }
     private func fetchData(offset: Int,handler: (Void -> Void)?) {
-        if(offset >= pages_tota*15){
-            println("fail")
+        if isLoadingData{
             handler?()
             return
         }
+        if(offset >= pages_tota*15){
+            println("fail")
+            handler?()
+            self.isLoadingData = false
+            return
+        }
+        self.isLoadingData = true
         Alamofire.request(.GET, "http://www.culturnews.com/endpoint/get/content/articles/", parameters: ["api_key": "IL5H9IGAWDCCKQQKWUDF","catid":"8","limit":"15","orderby":"created","maxsubs":"5","offset":offset])
             .responseJSON { (_, _, response, error) in
                 //convert to SwiftJSON
@@ -183,10 +191,26 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                         let indexPath = NSIndexPath(forItem: firstIndex + count, inSection: 0)
                         let submeta: JSON! = JSON(data:(subJson["metadata","xreference"].string!).dataUsingEncoding(NSUTF8StringEncoding)!)
                         let id: String = subJson["id"].string!
+                        let xasd = tryDouble("x", submeta)
+                        println(submeta)
+                        println("id: \(xasd)")
                         let s: NSDate = dateFormatter.dateFromString(self.tryGetString("s", json: submeta))!
                         let e: NSDate = dateFormatter.dateFromString(self.tryGetString("e", json: submeta))!
                         let type: Int = self.setType(self.tryGetString("category_title", json: subJson))
-                        let event = MrEvent(title: self.tryGetString("title", json: subJson), detail: self.tryGetString("metadesc", json: subJson),dateStart: s , dateEnd: e,fb: self.tryGetString("fb", json: submeta), tw: self.tryGetString("tw", json: submeta),wb: self.tryGetString("w", json: submeta), ig: self.tryGetString("ig", json: submeta), content: String(htmlEncodedString: self.tryGetString("content", json: subJson)), type: type ,id: id.toInt()!,  imgurl: subJson["images"]["image_intro"].string!)
+                        let event = MrEvent(
+                            title: self.tryGetString("title", json: subJson),
+                            detail: self.tryGetString("metadesc", json: subJson),
+                            dateStart: s ,
+                            dateEnd: e,
+                            fb: self.tryGetString("fb", json: submeta),
+                            tw: self.tryGetString("tw", json: submeta),
+                            wb: self.tryGetString("w", json: submeta),
+                            ig: self.tryGetString("ig", json: submeta),
+                            content: String(htmlEncodedString: self.tryGetString("content", json: subJson)),
+                            type: type ,id: id.toInt()!,
+                            imgurl: subJson["images"]["image_intro"].string!,
+                            x: tryDouble("x", submeta),
+                            y: tryDouble("y",  submeta))
                         if (event.dateEnd.isGreaterThanDate(NSDate())) {
                             self.events.append(event)
                             println("\(id)")
@@ -202,12 +226,14 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
                     self.events.sort({$1.dateStart.isGreaterThanDate($0.dateStart)})
                     //self.collectionView?.reloadData()
                     self.collectionView?.reloadItemsAtIndexPaths((self.collectionView?.indexPathsForVisibleItems())!)
+                    self.isLoadingData = false
                     handler?()
                     
             });
 
                 }else{
                     self.showAlertWithError(json["status"].error)
+                    self.isLoadingData = false
                     handler?()
                 }
                 }
@@ -219,7 +245,7 @@ class EventsViewController: UICollectionViewController,UICollectionViewDelegateF
         if let str = json[name].string{
             return str
         }else{
-            println(json[name].error)
+            //println(json[name].error)
             return ""
         }
     }

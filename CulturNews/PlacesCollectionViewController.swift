@@ -13,7 +13,7 @@ import MapleBacon
 
 let reuseIdentifier = "MoodCollectionViewCell"
 
-class TestCollectionViewController: UICollectionViewController, UIAlertViewDelegate,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate{
+class PlacesCollectionViewController: UICollectionViewController, UIAlertViewDelegate,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate{
     var Places: [Mrlace] = []
     var catid: Int = 0
     var offset: Int = 0

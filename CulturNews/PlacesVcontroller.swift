@@ -23,25 +23,25 @@ class PlacesVcontroller: UIViewController {
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         var heightNavfasd = self.navigationController?.navigationBar.frame.size.height
-        var controller2 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 11, nheight: heightNavfasd!, parent: self)
+        var controller2 : PlacesCollectionViewController = PlacesCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 11, nheight: heightNavfasd!, parent: self)
         controller2.title = "TEATRO"
         controllerArray.append(controller2)
-        var controller3 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 12, nheight: heightNavfasd!, parent: self)
+        var controller3 : PlacesCollectionViewController = PlacesCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 12, nheight: heightNavfasd!, parent: self)
         controller3.title = "MÚSICA CONTEMPORÁNEA"
         controllerArray.append(controller3)
         
-        var controller4 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 13, nheight: heightNavfasd!, parent: self)
+        var controller4 : PlacesCollectionViewController = PlacesCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 13, nheight: heightNavfasd!, parent: self)
         controller4.title = "ESPACIOS CULTURALES"
         controllerArray.append(controller4)
     
-        var controller5 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 14, nheight: heightNavfasd!, parent: self)
+        var controller5 : PlacesCollectionViewController = PlacesCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 14, nheight: heightNavfasd!, parent: self)
         controller5.title = "DANZA"
         controllerArray.append(controller5)
         
-        var controller6 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 15, nheight: heightNavfasd!, parent: self)
+        var controller6 : PlacesCollectionViewController = PlacesCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 15, nheight: heightNavfasd!, parent: self)
         controller6.title = "MÚSICA CLÁSICA"
         controllerArray.append(controller6)
-        var controller7 : TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 16, nheight: heightNavfasd!, parent: self)
+        var controller7 : PlacesCollectionViewController = PlacesCollectionViewController(nibName: "TestCollectionViewController", bundle: nil, catid: 16, nheight: heightNavfasd!, parent: self)
         controller7.title = "PINTURA"
         controllerArray.append(controller7)
         
